@@ -1,8 +1,15 @@
 <template>
 <div class="containor">
+  
+  
+
   <div v-for="items in list" :key ="items.id" class="resultcontainor">
-    <div class="imagesection">
+
+    
+      <div class="imagesection">
+        
       <img v-bind:src="`https://avatars.dicebear.com/v2/avataaars/${items.username}.svg?options[mood][]=happy`" alt="">
+        
 
     </div>
     <div  class="infosection">
@@ -12,8 +19,16 @@
       <p>Company : {{items.company.name}} </p>
       <p>Website : {{items.website}}</p>
       <p>Address : {{items.address.suite}} {{items.address.street}} {{items.address.city}}</p>
+      <button class="btn btn-success">
+        <a :href="items.id">View Profile</a>
+      </button>
+      
 
     </div>
+   
+    
+    
+    
   </div>
 
 </div>
@@ -48,6 +63,10 @@ export default {
   {
     const res = await fetch('https://jsonplaceholder.typicode.com/users');
     const data = await res.json();
+    if(res.status != 200){
+    alert('Failed to get what you want, got status: ' + res.status);
+    return null;
+ }
     console.log(data);
     this.list = data;
   }
@@ -88,8 +107,24 @@ export default {
   padding: 0;
   box-sizing: border-box;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
+  transition: all 0.9s ease in;
   
   
+}a
+{
+  color: white;
+  text-decoration: white;
+  list-style: none;
+
+}
+a:hover
+{
+  color: white;
+  text-decoration: white;
+}
+button
+{
+  margin: 10px;
 }
 .containor 
 {
@@ -102,18 +137,21 @@ export default {
   align-items: center;
   flex-direction: column;
   }
-
 .resultcontainor
 {
   margin: 20px;
   width: 70%;
-  height: 30%;
+  height: 45%;
   background-color: white;
   display: flex;
   flex-direction: row;
   cursor: pointer;
   
   
+}
+.resultcontainor:hover
+{
+  background-color: rgba(255, 255, 255, 0.753);
 }
 h3
 {
@@ -151,5 +189,45 @@ p
   width: 90%;
   
   object-fit: cover;
+}
+.buttons 
+{
+  
+  width: 20%;
+  height: 200px;
+  margin-left: 80px;
+  display: flex;
+  justify-content: flex-end;
+
+  align-items: flex-end;
+}
+@media screen and (max-width: 360px) {
+  *
+  {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+
+  }
+  h3
+  {
+    font-size: 1.2rem;
+
+
+  }
+  p
+  {
+    font-size: 0.5rem;
+  }
+  .resultcontainor
+  {
+    padding: 10px;
+  }
+  .infosection
+  {
+    padding: 10px;
+  }
+  
 }
 </style>

@@ -1,9 +1,12 @@
 <template>
-  <div class="containor">
+  <div>
     <Nuxt />
+    
   </div>
 </template>
 
-<style scoped>
+<style>
+
+
 
 </style>
